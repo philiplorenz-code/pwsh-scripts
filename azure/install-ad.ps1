@@ -1,4 +1,11 @@
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$DummyFolderName
+)
+
 Start-Transcript -Path "C:\ad-setup.log" -Force
+
+New-Item -Path "C:\" -Name $DummyFolderName -ItemType "directory" -Force
 
 # Initialise the new data disk (LUN 0) as F:
 $disk = Get-Disk | Where-Object PartitionStyle -Eq 'RAW' | Sort-Object Number | Select-Object -First 1
